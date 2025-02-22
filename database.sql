@@ -1,0 +1,15 @@
+-- database.sql
+CREATE TABLE Users (
+    UserID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Username TEXT UNIQUE NOT NULL,
+    Email TEXT UNIQUE NOT NULL,
+    PasswordHash TEXT NOT NULL,
+    Role TEXT CHECK(Role IN ('User', 'Admin')) NOT NULL
+);
+
+CREATE TABLE Notes (
+    NoteID INTEGER PRIMARY KEY AUTOINCREMENT,
+    UserID INTEGER NOT NULL,
+    Content TEXT NOT NULL,
+    FOREIGN KEY(UserID) REFERENCES Users(UserID)
+);
